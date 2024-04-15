@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ArtPiecePreview({ artPiece }) {
   const reduceWidth = artPiece.dimensions.width * 0.2;
@@ -14,6 +15,9 @@ export default function ArtPiecePreview({ artPiece }) {
           src={artPiece.imageSource}
         />
         <p>Artist: {artPiece.artist}</p>
+        <Link href={`/art-pieces/${artPiece.slug}`}>Details</Link>
+        <br />
+        <Link href={"./"}>Back to the Home Page</Link>
       </article>
     </>
   );

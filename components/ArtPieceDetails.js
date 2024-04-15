@@ -1,7 +1,8 @@
+import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function ArtPieceDetails({ currentArtPiece }) {
-  const router = useRouter;
   const { imageSource, name, artist, year, genre, dimensions } =
     currentArtPiece;
   const reducedHeight = dimensions.height * 0.5;
