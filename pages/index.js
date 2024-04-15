@@ -1,18 +1,16 @@
 import ArtPieces from "@/components/ArtPieces";
 import Spotlight from "@/components/Spotlight";
-import useSWR from "swr";
 
-export default function HomePage() {
-  const { data, isLoading } = useSWR(`https://example-apis.vercel.app/api/art`);
-
-  if (isLoading) return <div>Is Loading...</div>;
-
-  console.log(data);
-
+// rename function
+// pass artPieces to SpotLightPage as a prop
+export default function SpotlightPage({ artPieces }) {
+  // move useSWR-Hook and loading message from index.js to _app.js
+  // remove console.log
+  // update prop name
   return (
     <div>
       <Spotlight />
-      <ArtPieces artPieces={data} />
+      <ArtPieces artPieces={artPieces} />
     </div>
   );
 }
