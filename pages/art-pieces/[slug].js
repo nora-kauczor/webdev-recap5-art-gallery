@@ -5,7 +5,8 @@ export default function ArtPieceDetailsPage({ artPieces }) {
   const router = useRouter();
   const { slug } = router.query;
   const currentArtPiece = artPieces.find((piece) => piece.slug === slug);
-  currentArtPiece;
+  console.log(currentArtPiece);
+
   if (!currentArtPiece) {
     return null;
   }
