@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function ArtPieceDetails({ currentArtPiece }) {
   const router = useRouter;
   const { imageSource, name, artist, year, genre, dimensions } =
@@ -20,6 +22,7 @@ export default function ArtPieceDetails({ currentArtPiece }) {
         height={reducedHeight}
         width={reducedWidth}
       />
+      <Link href={"/art-pieces/."}>Back to Art Pieces Overview</Link>
     </>
   );
 }
