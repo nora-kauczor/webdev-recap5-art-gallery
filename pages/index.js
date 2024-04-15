@@ -11,7 +11,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <Spotlight />
+      <Spotlight artPieces={data} />
       <ArtPieces artPieces={data} />
     </div>
   );
