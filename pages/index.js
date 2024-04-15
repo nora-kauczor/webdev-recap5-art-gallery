@@ -1,4 +1,5 @@
 import ArtPieces from "@/components/ArtPieces";
+import Spotlight from "@/components/Spotlight";
 import useSWR from "swr";
 
 export default function HomePage() {
@@ -10,6 +11,7 @@ export default function HomePage() {
 
   return (
     <div>
+      <Spotlight />
       <ArtPieces artPieces={data} />
     </div>
   );
