@@ -10,7 +10,7 @@ export default function ArtPieces({ artPieces }) {
     <>
       <StyledList>
         {artPieces.map((artPiece) => (
-          <li key={uid()}>
+          <li key={id}>
             <ArtPiecePreview artPiece={artPiece} />
           </li>
         ))}

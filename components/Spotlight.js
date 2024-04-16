@@ -2,6 +2,8 @@ import Image from "next/image";
 import React from "react";
 
 export default function Spotlight({ artPieces }) {
+  console.log(artPieces);
+
   const randomIndex = Math.floor(Math.random() * artPieces.length);
   const spotlightArtPiece = artPieces[randomIndex];
   const reduceWidth = spotlightArtPiece.dimensions.width * 0.2;
