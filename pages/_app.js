@@ -4,6 +4,7 @@ import { SWRConfig } from "swr";
 import useSWR from "swr";
 import { useState } from "react";
 import { uid } from "uid";
+import { useEffect } from "react";
 
 const fetcher = async (url) => {
   const response = await fetch(url);
@@ -22,12 +23,31 @@ export default function App({ Component, pageProps }) {
     fetcher
   );
 
-  // const initalArtPiecesInfo = data.map((artPiece) => {const isFavorite = false; return {...artPiece, isFavorite,  key: uid()}});
-  // const [artPiecesInfo, setArtPiecesInfo] = useState(initalArtPiecesInfo);
+  const [favoriteArtPieceSlugs, setFavoriteArtPieceSlugs] = useState([]);
 
-  // function handleChangeArtPiecesInfo (artPieceToChange) {
-  //   const index = artPiecesInfo.findIndex((artPiece) => artPiece.id === artPieceToChange.id);
-  //   setArtPiecesInfo((artPiecesInfo) => {artPiecesInfo[index].isFavorite = !artPiecesInfo[index].isFavorite; return artPiecesInfo});};
+  function checkIfArtPieceIsFavorite(slug) {
+    return favoriteArtPieceSlugs.includes(slug);
+  }
+
+  function addArtPieceToFavorites(slug) {
+    setFavoriteArtPieceSlugs([slug, ...favoriteArtPieceSlugs]);
+  }
+  function removeArtPieceFromFavorites(slug) {
+    setFavoriteArtPieceSlugs(() => {
+      const favoriteArtPiecesSlugsWithoutCertainSlug =
+        favoriteArtPieceSlugs.filter((item) => item !== slug);
+      return favoriteArtPiecesSlugsWithoutCertainSlug;
+    });
+  }
+
+  function handleFavoriteButton(artPiece) {
+    const slug = artPiece.slug;
+    checkIfArtPieceIsFavorite(slug)
+      ? removeArtPieceFromFavorites(slug)
+      : addArtPieceToFavorites(slug);
+  }
+
+  console.log(favoriteArtPieceSlugs);
 
   if (isLoading) {
     return <div>Is Loading...</div>;
@@ -41,7 +61,12 @@ export default function App({ Component, pageProps }) {
       <GlobalStyle />
       <SWRConfig value={{ fetcher }}>
         <Layout>
-          <Component {...pageProps} artPieces={data} />
+          <Component
+            {...pageProps}
+            artPieces={data}
+            onFavoriteButton={handleFavoriteButton}
+            favoriteArtPieceSlugs={favoriteArtPieceSlugs}
+          />
         </Layout>
       </SWRConfig>
     </>
