@@ -2,7 +2,11 @@ import { uid } from "uid";
 import ArtPiecePreview from "./ArtPiecePreview";
 import styled from "styled-components";
 
-export default function ArtPieces({ artPieces }) {
+export default function ArtPieces({
+  artPieces,
+  favoriteArtPieceSlugs,
+  onFavoriteButton,
+}) {
   const StyledList = styled.ul`
     list-style: none;
   `;
@@ -10,8 +14,12 @@ export default function ArtPieces({ artPieces }) {
     <>
       <StyledList>
         {artPieces.map((artPiece) => (
-          <li key={id}>
-            <ArtPiecePreview artPiece={artPiece} />
+          <li key={uid()}>
+            <ArtPiecePreview
+              artPiece={artPiece}
+              favoriteArtPieceSlugs={favoriteArtPieceSlugs}
+              onFavoriteButton={onFavoriteButton}
+            />
           </li>
         ))}
       </StyledList>

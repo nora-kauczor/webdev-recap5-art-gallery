@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import FavoriteButton from "./FavoriteButton";
 
-export default function ArtPiecePreview({ artPiece }) {
+export default function ArtPiecePreview({
+  artPiece,
+  favoriteArtPieceSlugs,
+  onFavoriteButton,
+}) {
   const reduceWidth = artPiece.dimensions.width * 0.2;
   const reduceHeight = artPiece.dimensions.height * 0.2;
   return (
@@ -15,6 +20,11 @@ export default function ArtPiecePreview({ artPiece }) {
           src={artPiece.imageSource}
         />
         <p>Artist: {artPiece.artist}</p>
+        <FavoriteButton
+          artPiece={artPiece}
+          favoriteArtPieceSlugs={favoriteArtPieceSlugs}
+          onFavoriteButton={onFavoriteButton}
+        />
         <Link href={`/art-pieces/${artPiece.slug}`}>Details</Link>
         <br />
         <Link href={"./"}>Back to the Home Page</Link>
