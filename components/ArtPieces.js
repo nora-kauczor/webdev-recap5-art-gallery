@@ -6,6 +6,8 @@ export default function ArtPieces({
   artPieces,
   favoriteArtPieceSlugs,
   onFavoriteButton,
+  error,
+  isLoading,
 }) {
   const StyledList = styled.ul`
     list-style: none;
@@ -19,6 +21,8 @@ export default function ArtPieces({
               artPiece={artPiece}
               favoriteArtPieceSlugs={favoriteArtPieceSlugs}
               onFavoriteButton={onFavoriteButton}
+              error={error}
+              isLoading={isLoading}
             />
           </li>
         ))}

@@ -2,9 +2,10 @@ import Layout from "@/components/Layout";
 import GlobalStyle from "../styles";
 import { SWRConfig } from "swr";
 import useSWR from "swr";
-import { useState } from "react";
+
 import { uid } from "uid";
 import { useEffect } from "react";
+import useLocalStorageState from "use-local-storage-state";
 
 const fetcher = async (url) => {
   const response = await fetch(url);
@@ -23,7 +24,10 @@ export default function App({ Component, pageProps }) {
     fetcher
   );
 
-  const [favoriteArtPieceSlugs, setFavoriteArtPieceSlugs] = useState([]);
+  const [favoriteArtPieceSlugs, setFavoriteArtPieceSlugs] =
+    useLocalStorageState("slug", {
+      defaultValue: [],
+    });
 
   function checkIfArtPieceIsFavorite(slug) {
     return favoriteArtPieceSlugs.includes(slug);
@@ -47,8 +51,6 @@ export default function App({ Component, pageProps }) {
       : addArtPieceToFavorites(slug);
   }
 
-  console.log(favoriteArtPieceSlugs);
-
   if (isLoading) {
     return <div>Is Loading...</div>;
   }
@@ -66,6 +68,8 @@ export default function App({ Component, pageProps }) {
             artPieces={data}
             onFavoriteButton={handleFavoriteButton}
             favoriteArtPieceSlugs={favoriteArtPieceSlugs}
+            error={error}
+            isLoading={isLoading}
           />
         </Layout>
       </SWRConfig>

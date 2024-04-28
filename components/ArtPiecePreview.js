@@ -6,9 +6,17 @@ export default function ArtPiecePreview({
   artPiece,
   favoriteArtPieceSlugs,
   onFavoriteButton,
+  error,
+  isLoading,
 }) {
   const reduceWidth = artPiece.dimensions.width * 0.2;
   const reduceHeight = artPiece.dimensions.height * 0.2;
+  if (isLoading) {
+    return <div>Is Loading...</div>;
+  }
+  if (error) {
+    return <div>Error...</div>;
+  }
   return (
     <>
       <article>
@@ -24,6 +32,8 @@ export default function ArtPiecePreview({
           artPiece={artPiece}
           favoriteArtPieceSlugs={favoriteArtPieceSlugs}
           onFavoriteButton={onFavoriteButton}
+          error={error}
+          isLoading={isLoading}
         />
         <Link href={`/art-pieces/${artPiece.slug}`}>Details</Link>
         <br />
